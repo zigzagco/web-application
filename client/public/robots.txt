@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /nogooglebot/
+
+Sitemap: https://yn.gl/sitemap.xml
