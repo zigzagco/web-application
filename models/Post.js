@@ -2,14 +2,26 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const schema = new Schema({
+    postId:{
+        type:String,
+        required:true
+    },
     title: {
         type: String,
         required: true
     },
-    text:{type: String,
+    text:{
+        type: String,
         required: true
     },
-    imgUri:{type:String},
+    imgUri:{
+        type:String,
+        required: true
+    },
+    keywords:{
+        type:Array,
+        required: true
+    },
     meta: {
         createdAt: {
             type: Date,

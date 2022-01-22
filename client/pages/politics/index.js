@@ -72,17 +72,15 @@ export default function Politics({posts}) {
 export async function getServerSideProps() {
     const res = await fetch(process.env.API_URL+`/post`)
     const postss = await res.json()
-    const options = {
-        title: ["Экспертный совет ЕР поддержал законопроект о правилах ДЭГ", "randomColor"]
-    };
-
-    const posts = postss.filter(obj => Object.keys(options).some(key => {
-        if (key !== "title") {
-            return obj[key] == options[key];
-        } else {
-            return options[key].some(s => s == obj[key]);
+    const posts = postss.filter(function(item){
+        let cheker = item.keywords.includes('Политика')
+        if (cheker===true){
+            return item
+        }else {
+            return null
         }
-    }));
+    });
+    console.log(posts)
 
     if (!posts) {
         return {

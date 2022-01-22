@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Hamburger from "./Hamburger";
 import styles from '../styles/NavBar.module.css'
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 export default function Navbar(){
 
@@ -10,44 +10,85 @@ export default function Navbar(){
     const toggleHamburger = () =>{
         setHamburgerOpen(!hamburgerOpen)
     }
+    //------------------------animation head start--------------------------
 
+    const [clientWindowHeight, setClientWindowHeight] = useState("");
+
+    const [padding, setPadding] = useState(0);
+    const [pos, setPos] = useState('');
+
+    const handleScroll = () => {
+        setClientWindowHeight(window.scrollY);
+    };
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    });
+    useEffect(() => {
+        let backgroundTransparacyVar = clientWindowHeight ;
+        console.log("bg:  "+backgroundTransparacyVar)
+        if (backgroundTransparacyVar < 80){
+            setPos('absolute')
+            setPadding(0);
+        }
+        if (backgroundTransparacyVar > 80 && backgroundTransparacyVar<130) {
+            let paddingVar = -130 + backgroundTransparacyVar ;
+            setPadding(paddingVar);
+            setPos('fixed')
+        }
+        if (backgroundTransparacyVar > 130){
+            setPos('fixed')
+            setPadding(0);
+        }
+
+    }, [clientWindowHeight]);
+
+    //--------------------------end animation head------------------------------
     return(
-        <header className={styles.header}>
-            <div className="container">
-                <div className={styles.header_row}>
-                    <div className={styles.header_logo}><Link href="/">
-                        <a><span className="red">YN.</span ><span className="blue">G</span><span className="yellow">L</span></a>
-                    </Link></div>
-                    <div className="searchfield">
-                        <form className="search_form">
-                            <input
-                                type="text"
-                                name="name"
-                                placeholder="Поиск в YNGL"
-                                className="search_input"
-                            />
-                            <button id="button"><i className="fa-search"/></button>
-                        </form>
-                    </div>
+        <>
+            <div className="sticky_head" style={{
+                top: `${padding}px`,
+                position: `${pos}`
+            }}>
+                <div className="container">
+                    <div className={styles.header_row}>
+                        <div className={styles.header_logo}><Link href="/">
+                            <a><span className="red">YN.</span ><span className="blue">G</span><span className="yellow">L</span></a>
+                        </Link></div>
+                        <div className="searchfield">
+                            <form className="search_form">
+                                <input
+                                    type="text"
+                                    name="name"
+                                    placeholder="Поиск в YNGL"
+                                    className="search_input"
+                                />
+                                <button id="button"><i className="fa-search"/></button>
+                            </form>
+                        </div>
 
-                    <div className={styles.header_login}>
-                        <div className="navigation">
-                            {/*<div className="hamburger" onClick={toggleHamburger}>
+                        <div className={styles.header_login}>
+                            <div className="navigation">
+                                {/*<div className="hamburger" onClick={toggleHamburger}>
                                 <Hamburger isOpen={hamburgerOpen}/>
                             </div>*/}
+                            </div>
                         </div>
-                    </div>
-                    <div className="navComponent">
-                        <div className="navContainer">
-                        <ul>
-                            <li><Link href="/contact">
-                                <a>КОНТАКТЫ</a>
-                            </Link></li>
-                        </ul>
+                        <div className="navComponent">
+                            <div className="navContainer">
+                                <ul>
+                                    <li><Link href="/contact">
+                                        <a>КОНТАКТЫ</a>
+                                    </Link></li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        <header className={styles.header}>
+            <div className="bbemp"/>
             <div className="bottom_bar">
                 <div className="container">
                     <div className="container_head">
@@ -60,7 +101,8 @@ export default function Navbar(){
                     </div>
                 </div>
             </div>
-            <style jsx global>{`
+        </header>
+    <style jsx global>{`
                 .bbb{
                 padding-right: ${hamburgerOpen ? '140px' : '0px'};
                 }
@@ -75,7 +117,15 @@ export default function Navbar(){
                 }
                 }   
                 `}</style>
-            <style jsx>{`
+    <style jsx>{`
+                .bbemp{
+                height: 50px;
+                }
+                .sticky_head{
+                width: 100%;
+                background: #fff;
+                z-index: 999;
+                }
                 .container_head{
                   display: flex;
                   flex-direction: row;
@@ -191,8 +241,7 @@ export default function Navbar(){
                   justify-content: center;
                 }
             `}</style>
-        </header>
-
+    </>
 
 
     )
