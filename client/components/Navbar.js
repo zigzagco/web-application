@@ -13,7 +13,7 @@ export default function Navbar(){
     //------------------------animation head start--------------------------
 
     const [clientWindowHeight, setClientWindowHeight] = useState("");
-
+    const [headOpen, setheadOpen] = useState(false);
     const [padding, setPadding] = useState(0);
     const [pos, setPos] = useState('');
 
@@ -26,20 +26,23 @@ export default function Navbar(){
         return () => window.removeEventListener("scroll", handleScroll);
     });
     useEffect(() => {
-        let backgroundTransparacyVar = clientWindowHeight ;
+        let backgroundTransparacyVar = clientWindowHeight
         console.log("bg:  "+backgroundTransparacyVar)
         if (backgroundTransparacyVar < 80){
             setPos('absolute')
-            setPadding(0);
+            setPadding(0)
+            setheadOpen(false)
         }
         if (backgroundTransparacyVar > 80 && backgroundTransparacyVar<130) {
-            let paddingVar = -130 + backgroundTransparacyVar ;
-            setPadding(paddingVar);
+            let paddingVar = -130 + backgroundTransparacyVar
+            setPadding(paddingVar)
             setPos('fixed')
-        }
+            setheadOpen(true)
+    }
         if (backgroundTransparacyVar > 130){
             setPos('fixed')
-            setPadding(0);
+            setPadding(0)
+            setheadOpen(true)
         }
 
     }, [clientWindowHeight]);
@@ -49,7 +52,7 @@ export default function Navbar(){
         <>
             <div className="sticky_head" style={{
                 top: `${padding}px`,
-                position: `${pos}`
+                position: `${pos}`,
             }}>
                 <div className="container">
                     <div className={styles.header_row}>
@@ -118,6 +121,7 @@ export default function Navbar(){
                 }   
                 `}</style>
     <style jsx>{`
+                
                 .bbemp{
                 height: 50px;
                 }
@@ -125,15 +129,17 @@ export default function Navbar(){
                 width: 100%;
                 background: #fff;
                 z-index: 999;
+                box-shadow: ${headOpen ? '0 1px 6px 0 rgb(32 33 36 / 28%)' : 'none'};
                 }
                 .container_head{
                   display: flex;
                   flex-direction: row;
                   justify-content: start;
+                  padding: 10px 10px 10px 15px;
                 }
                 .cattext{
-                padding-right: 5px;
-                padding-left: 5px;
+                padding-right: 10px;
+                padding-left: 10px;
                 }
                 .searchfield{
                 -webkit-flex: 1 1 100%;
@@ -150,7 +156,7 @@ export default function Navbar(){
                 border: 1px solid transparent;
                 -webkit-border-radius: 8px;
                 border-radius: 8px;
-                margin-left: auto;
+                margin-left: 50px;
                 margin-right: auto;
                 max-width: 500px;
                 position: relative;
