@@ -22,6 +22,11 @@ const schema = new Schema({
         type:Array,
         required: true
     },
+    en_keywords:{
+        type:Array,
+    },
+    time:{type:String},
+    date:{type:String},
     meta: {
         createdAt: {
             type: Date,
@@ -33,4 +38,5 @@ const schema = new Schema({
         }
     }
 })
+
 module.exports = mongoose.model('Post',schema)

@@ -133,7 +133,7 @@ src: url("../public/static/Fonts/Poppins/Poppins-Light.ttf") format("truetype");
 .container_left{
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 0px;
   transition: margin-left .25s cubic-bezier(0.4,0.0,0.2,1),visibility 0s linear 0s;
 }
 .article_card{
@@ -191,6 +191,13 @@ a{
   line-height: 1.3333333333333333em;
   color: #202124;
   font-family: Roboto-Medium,sans-serif;
+}
+.tags_title{
+  font-size: 36px;
+  line-height: 44px;
+  font-weight: bold;
+  margin-bottom: 30px;
+  padding-top: 30px;
 }
 .article_desc{
   color: #3c4043;

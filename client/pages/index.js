@@ -4,9 +4,16 @@ import styles from '../styles/Home.module.css'
 import Link from "next/link";
 import Navbar from "../components/Navbar";
 import NextScript from "next/script";
+import InfiniteScroll from "react-infinite-scroll-component"
+import {useEffect,useState} from "react";
 
-export default function Home({posts}) {
-    if(!posts) 'Loading...'
+export default function Home({data}) {
+    const [posts,setPosts] = useState(data)
+const getMorePosts = async () =>{
+    const res = await fetch(process.env.API_URL+`/post?_start=${posts.length}&_limit=10`)
+    const newPosts = await res.json()
+    setPosts(posts => [...posts, ...newPosts])
+}
 
     return (
     <div>
@@ -30,13 +37,14 @@ export default function Home({posts}) {
       </Head>
     <Navbar/>
         <div className="container">
+            <InfiniteScroll next={getMorePosts} hasMore={false} loader={<h4>Loading...</h4>} dataLength={posts.length}>
             <div className="container_left bbb">
                         {
-                            posts.map((post,idx)=>{
+                            data.map((post,idx)=>{
                                 return(
                                     <article className="article_card" key={idx}>
                                         <div className="article">
-                                    <Link  href={'/[id]'} as={'/'+post._id} passHref>
+                                    <Link  href={'[dir]/[id]'} as={'/'+post.date+'/'+post._id} passHref>
                                         <div className="article_inner">
                                             <div className="article_box">
                                                 <div className="article_left">
@@ -51,8 +59,8 @@ export default function Home({posts}) {
                                                     <div className="article_title"><h3>{post.title}</h3></div>
                                                     <div className="article_desc">{post.text.substr(0,250)}</div>
                                                     <div className="article_meta">
-                                                        <time dateTime={post.date} className="news__date">
-                                                            {post.date}
+                                                        <time dateTime={post.time +" "+post.date} className="news__date">
+                                                            {post.time +" "+post.date}
                                                         </time>
                                                     </div>
                                                 </div>
@@ -66,22 +74,24 @@ export default function Home({posts}) {
                             })
                         }
             </div>
+            </InfiniteScroll>
         </div>
         </div>
   )
 }
 
 export async function getServerSideProps() {
-    const res = await fetch(process.env.API_URL+`/post`)
-    const posts = await res.json()
+    const res = await fetch(process.env.API_URL+`/post?_limit=10`)
 
-    if (!posts) {
+    const data = await res.json()
+
+    if (!data) {
         return {
             notFound: true,
         }
     }
 
     return {
-        props: {posts},
+        props: {data},
     }
 }

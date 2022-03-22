@@ -27,7 +27,6 @@ export default function Navbar(){
     });
     useEffect(() => {
         let backgroundTransparacyVar = clientWindowHeight
-        console.log("bg:  "+backgroundTransparacyVar)
         if (backgroundTransparacyVar < 80){
             setPos('absolute')
             setPadding(0)
@@ -95,12 +94,12 @@ export default function Navbar(){
             <div className="bottom_bar">
                 <div className="container">
                     <div className="container_head">
-                        <div className="cattext"><Link href="/politics">Политика</Link></div>
-                        <div className="cattext"><Link href="">В мире</Link></div>
-                        <div className="cattext"><Link href="">Экономика</Link></div>
-                        <div className="cattext"><Link href="">Авто</Link></div>
-                        <div className="cattext"><Link href="">Спорт</Link></div>
-                        <div className="cattext"><Link href="">Недвижимость</Link></div>
+                        <div className="cattext"><Link href="/politika" >Политика</Link></div>
+                        <div className="cattext"><Link href="/world" >В мире</Link></div>
+                        <div className="cattext"><Link href="/ekonomika" >Экономика</Link></div>
+                        <div className="cattext"><Link href="/auto" >Авто</Link></div>
+                        <div className="cattext"><Link href="/sport" >Спорт</Link></div>
+                        <div className="cattext"><Link href="/flats" >Недвижимость</Link></div>
                     </div>
                 </div>
             </div>
