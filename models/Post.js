@@ -11,7 +11,7 @@ const schema = new Schema({
         required: true
     },
     text:{
-        type: String,
+        type: Array,
         required: true
     },
     imgUri:{

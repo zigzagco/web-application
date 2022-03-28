@@ -23,7 +23,8 @@ router.get('/',async (req,res) =>{
         const keywords=req.query._path
         let posts
         if (keywords!=null){
-            posts = await Post.find({ en_keywords:""+keywords } )
+            posts = await Post.find({ en_keywords:""+keywords })
+            console.log(posts)
         }else {
              posts = await Post.find()
         }
