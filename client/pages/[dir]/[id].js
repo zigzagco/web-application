@@ -38,7 +38,7 @@ export default function Post({post}){
                             {
                                 post.text.map((postkk,indexx)=>{
                                     return(
-                                        <p>{post.text[indexx]}</p>
+                                        <p key={indexx}>{post.text[indexx]}</p>
                                     )
                                 })
                             }
