@@ -95,7 +95,7 @@ export default function Navbar(){
                 <div className="container">
                     <div className="container_head">
                         <div className="cattext"><Link href="/politika" >Политика</Link></div>
-                        <div className="cattext"><Link href="/world" >В мире</Link></div>
+                        <div className="cattext"><Link href="/v_mire" >В мире</Link></div>
                         <div className="cattext"><Link href="/ekonomika" >Экономика</Link></div>
                         <div className="cattext"><Link href="/auto" >Авто</Link></div>
                         <div className="cattext"><Link href="/sport" >Спорт</Link></div>
