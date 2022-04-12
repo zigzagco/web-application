@@ -1,10 +1,12 @@
 import Link from 'next/link'
 import Hamburger from "./Hamburger";
 import styles from '../styles/NavBar.module.css'
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
+//import {router} from "next/client";
+import {useRouter} from "next/router";
+
 
 export default function Navbar(){
-
     const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
     const toggleHamburger = () =>{
@@ -46,6 +48,7 @@ export default function Navbar(){
 
     }, [clientWindowHeight]);
 
+
     //--------------------------end animation head------------------------------
     return(
         <>
@@ -56,7 +59,7 @@ export default function Navbar(){
                 <div className="container">
                     <div className={styles.header_row}>
                         <div className={styles.header_logo}><Link href="/">
-                            <a><span className="red">YN.</span ><span className="blue">G</span><span className="yellow">L</span></a>
+                            <a><span className="yn">YN.</span ><span className="gl">GL</span></a>
                         </Link></div>
                         <div className="searchfield">
                             <form className="search_form">
@@ -89,21 +92,7 @@ export default function Navbar(){
                     </div>
                 </div>
             </div>
-        <header className={styles.header}>
             <div className="bbemp"/>
-            <div className="bottom_bar">
-                <div className="container">
-                    <div className="container_head">
-                        <div className="cattext"><Link href="/politika" >Политика</Link></div>
-                        <div className="cattext"><Link href="/v_mire" >В мире</Link></div>
-                        <div className="cattext"><Link href="/ekonomika" >Экономика</Link></div>
-                        <div className="cattext"><Link href="/auto" >Авто</Link></div>
-                        <div className="cattext"><Link href="/sport" >Спорт</Link></div>
-                        <div className="cattext"><Link href="/flats" >Недвижимость</Link></div>
-                    </div>
-                </div>
-            </div>
-        </header>
     <style jsx global>{`
                 .bbb{
                 padding-right: ${hamburgerOpen ? '140px' : '0px'};

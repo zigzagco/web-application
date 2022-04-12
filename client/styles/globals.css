@@ -101,7 +101,7 @@ position: relative;
 height: 100%;
 margin: 0;
 line-height: 1.65;
-font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue','Poppins','NunitoSans', sans-serif;
 font-size: 16px;
 font-weight: 400;
 min-width: 320px;
@@ -117,16 +117,36 @@ font-family: "Poppins";
 src: url("../public/static/Fonts/Poppins/Poppins-Light.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
-  font-display: swap;
+  font-display: block;
 }
 @font-face {
   font-family: "NunitoSans";
   src: url("../public/static/Fonts/Nunito_Sans/NunitoSans-Light.ttf") format("truetype");
   font-style: normal;
   font-weight: normal;
-  font-display: swap;
+  font-display: block;
 }
-
+.image{
+  background-color: #f1f3f4;
+}
+.article_title:hover{
+  text-decoration: underline;
+}
+.yn{
+  font-weight: 600;
+  font-size: 21px;
+  color: orangered;
+  font-family: 'NunitoSans',sans-serif;
+}
+.gl{
+  font-weight: 600;
+  font-size: 21px;
+  color: cornflowerblue;
+  font-family: 'Poppins', sans-serif;
+}
+.searchfield{
+  display: none;
+}
 .container {
   padding: 0 15px;
 }
@@ -153,11 +173,16 @@ src: url("../public/static/Fonts/Poppins/Poppins-Light.ttf") format("truetype");
   margin-bottom: 30px;
   display: flex;
   flex-direction: row;
-  padding: 10px 10px 10px 15px;
+  padding: 10px 10px 10px 0px;
 }
 .key_item{
   padding-right: 10px;
   padding-left: 10px;
+  border-radius: 8px;
+  background: #f1f3f4;
+  border: 1px solid transparent;
+  margin-right: 8px;
+  margin-left: 8px;
 }
 .post_img{
   display: block;
@@ -171,7 +196,7 @@ src: url("../public/static/Fonts/Poppins/Poppins-Light.ttf") format("truetype");
   border-radius: 8px;
   box-shadow: none;
   margin-bottom: 8px;
-  cursor: pointer;
+
 }
 .article{
   font-family: arial,sans-serif;
@@ -217,9 +242,11 @@ a{
   -webkit-box-orient: vertical;
   white-space: normal;
   font-size: 18px;
+  font-weight: bold;
   line-height: 1.3333333333333333em;
   color: #202124;
   font-family: Roboto-Medium,sans-serif;
+  cursor: pointer;
 }
 .tags_title{
   font-size: 36px;
@@ -262,12 +289,32 @@ a{
   .container {
     max-width: 720px;
   }
+  .sticky_head{
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+  .yn{
+    font-weight: 600;
+    font-size: 23px;
+    color: orangered;
+    font-family: 'NunitoSans',sans-serif;
+  }
+  .gl{
+    font-weight: 600;
+    font-size: 23px;
+    color: cornflowerblue;
+    font-family: 'Poppins', sans-serif;
+  }
+  .searchfield{
+    display: block;
+  }
 }
 
 @media (min-width: 992px) {
   .container {
     max-width: 960px;
   }
+
 }
 
 @media (min-width: 1200px){
@@ -280,4 +327,43 @@ a{
   font-family: "PT Sans",times,sans-serif;
   font-size: 46px;
   font-weight: 700;
+}
+
+.bbemp{
+  height: 50px;
+}
+.sticky_head{
+  width: 100%;
+  background: #fff;
+  z-index: 999;
+  box-shadow:0 1px 6px 0 rgba(32 33 36 0.28);
+}
+.container_head{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding: 10px 10px 10px 0px;
+}
+.cattext{
+  border-radius: 8px;
+  background: #f1f3f4;
+  border: 1px solid transparent;
+  margin-right: 8px;
+  margin-left: 8px;
+}
+.ctext{
+  padding: 5px 10px;
+  width: 100%;
+}
+.catname{
+  color: black;
+  font-weight: bold;
+  cursor: pointer;
+}
+.catname:hover{
+  text-decoration: underline;
+}
+.bottom_bar{
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

@@ -20,24 +20,70 @@ router.post('/add',async(req,res)=>{
 
 router.get('/',async (req,res) =>{
     try {
-        const keywords=req.query._path
-        let posts
-        if (keywords!=null){
-            posts = await Post.find({ en_keywords:""+keywords })
-            console.log(posts)
-        }else {
-             posts = await Post.find()
+        const pageOptions = {
+            page: parseInt(req.query.start) || 0,
+            limit: parseInt(req.query.limit)
         }
-        res.json(posts)
+             Post.find().sort({ date:-1,_id: 1}).skip(pageOptions.page)
+                 .limit(pageOptions.limit)
+                 .exec(function (err, doc) {
+                     if(err) { res.status(500).json(err); return; }
+                     res.status(200).json(doc);
+                 })
+    }catch (e){
+        res.status(500).send()
+    }
+})
+router.get('/count',async (req,res) =>{
+    try {
+        Post.find()
+            .count().exec(function (err, doc) {
+            if(err) { res.status(500).json(err); return; }
+            res.status(200).json(doc);
+        });
+    }catch (e){
+        res.status(500).send()
+    }
+})
+router.get('/getnewpost', async (req, res) => {
+    try {
+        const pageOptions = {
+            page: parseInt(req.query.start) || 0,
+            limit: parseInt(req.query.limit) || 10
+        }
+        const keywords=req.query._path
+        if (keywords!==undefined){
+        Post.find({ en_keywords:""+keywords }).sort({ date:-1,_id: 1})
+            .skip(pageOptions.page)
+            .limit(pageOptions.limit)
+            .exec(function (err, doc) {
+                if(err) { res.status(500).json(err); return; }
+                res.status(200).json(doc);
+            });
+        }else {
+            console.log("getpost")
+        }
+        } catch (e) {
+        res.status(500).send()
+    }
+})
+router.get('/getnewpost/count', async (req, res) => {
+    try {
+        const keywords=req.query._path
 
-    }catch (error){
-        console.log(error)
+         Post.find({ en_keywords:""+keywords })
+            .count().exec(function (err, doc) {
+             if(err) { res.status(500).json(err); return; }
+             res.status(200).json(doc);
+         });
+    } catch (e) {
+        res.status(500).send()
     }
 })
 router.get('/get',async (req,res) =>{
     try {
         const keywords=req.query._path
-        console.log(keywords)
+        //console.log(keywords)
         let dir
         if (keywords!=null){
             dir = await Dir.findOne({en_keywords: ""+keywords})
@@ -52,7 +98,6 @@ router.get('/get',async (req,res) =>{
 router.get('/:id',async (req,res)=>{
     try {
        const {id} = req.params
-        console.log(req.params + " -- "+id)
         const post = await Post.findById(id)
         res.json(post)
     }catch (error){

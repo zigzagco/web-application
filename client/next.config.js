@@ -1,5 +1,6 @@
 require('dotenv').config()
 module.exports = {
+  productionBrowserSourceMaps: true,
   env: {
     //API_URL:'http://192.168.5.125:8000/api'
     API_URL: 'http://localhost:8000/api'

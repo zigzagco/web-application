@@ -7,8 +7,6 @@ const PORT = process.env.PORT || 8000
 app.use(cors())
 app.use(express.json({extended:true}))
 app.use('/api/post',require('./routes/post.routes'))
-const AdminRouter = require('./routes/admin.router')
-app.use('/admin',AdminRouter )
 
 
 async function start(){
