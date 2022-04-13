@@ -43,32 +43,32 @@ useEffect(()=>{
                 <div className="container">
                     <div className="container_head">
                         <div className="cattext"><div className="ctext">
-                                <Link href={"/[dir]"} as={"/politika"} >
+                                <Link href={"/[dir]"} as={"/politika"} passHref>
                                     <span className="catname">Политика</span>
                                 </Link>
                             </div></div>
                         <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/v_mire"} >
+                            <Link href={"/[dir]"} as={"/v_mire"} passHref>
                                 <span className="catname">В мире</span>
                             </Link>
                         </div></div>
                         <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} >
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
                                 <span className="catname">Экономика</span>
                             </Link>
                         </div></div>
                         <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} >
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
                                 <span className="catname">Экономика</span>
                             </Link>
                         </div></div>
                         <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} >
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
                                 <span className="catname">Экономика</span>
                             </Link>
                         </div></div>
                         <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} >
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
                                 <span className="catname">Экономика</span>
                             </Link>
                         </div></div>
@@ -124,9 +124,13 @@ useEffect(()=>{
   )
 }
 
-export async function getServerSideProps() {
-    const res = await fetch(process.env.API_URL+`/post?start=0&limit=10`)
-    const data = await res.json()
+export async function getServerSideProps({ req, res }) {
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
+    const resp = await fetch(process.env.API_URL+`/post?start=0&limit=10`)
+    const data = await resp.json()
     const getNumberOfPosts = await fetch(process.env.API_URL+`/post/count`)
     const NumberOfPosts = await getNumberOfPosts.json()
     if (!data) {
