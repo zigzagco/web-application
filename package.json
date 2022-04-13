@@ -7,10 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "client": "npm run dev --prefix client",
     "client_prod_build": "npm run build --prefix client",
-    "client_prod_start": "npm run start --prefix client",
     "start": "nodemon server.js",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
-    "prod": "concurrently \"npm run start\" \"npm run client_prod_build\" \"npm run client_prod_start\""
+    "prod": "concurrently \"npm run start\" \"npm run build --prefix client\" \"npm run start --prefix client\""
   },
   "keywords": [],
   "author": "",

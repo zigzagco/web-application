@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import InfiniteScroll from "react-infinite-scroll-component"
 import {useEffect,useState} from "react";
+import {useRouter} from "next/router";
 export default function Home({data , NumberOfPosts}) {
     const [posts,setPosts] = useState(data)
     const [hasMore,sethasMore] = useState(true)
@@ -37,11 +38,6 @@ useEffect(()=>{
                         <div className="cattext"><div className="ctext">
                             <Link href={"/[dir]"} as={"/v_mire"} passHref>
                                 <span className="catname">В мире</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Экономика</span>
                             </Link>
                         </div></div>
                         <div className="cattext"><div className="ctext">
@@ -111,7 +107,11 @@ useEffect(()=>{
   )
 }
 
-export async function getServerSideProps() {
+export async function getServerSideProps({ req, res }) {
+    res.setHeader(
+        'Cache-Control',
+        'public, s-maxage=10, stale-while-revalidate=59'
+    )
     const resp = await fetch(process.env.API_URL+`/post?start=0&limit=10`)
     const data = await resp.json()
     const getNumberOfPosts = await fetch(process.env.API_URL+`/post/count`)
