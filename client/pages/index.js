@@ -1,9 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import styles from '../styles/Home.module.css'
 import Link from "next/link";
 import Navbar from "../components/Navbar";
-import NextScript from "next/script";
 import InfiniteScroll from "react-infinite-scroll-component"
 import {useEffect,useState} from "react";
 export default function Home({data , NumberOfPosts}) {
@@ -15,23 +13,12 @@ const getMorePosts = async () =>{
     setPosts(posts => [...posts, ...newPosts])
 }
 useEffect(()=>{
-    sethasMore(NumberOfPosts>posts.length ? true : false)
+    sethasMore(NumberOfPosts > posts.length)
 },[posts])
+
     return (
     <div>
-        <NextScript
-            src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-            strategy="afterInteractive"
-        />
-        <NextScript id="google-analytics" strategy="afterInteractive">
-            {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){window.dataLayer.push(arguments);}
-          gtag('js', new Date());
 
-          gtag('config', 'GA_MEASUREMENT_ID');
-        `}
-        </NextScript>
       <Head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8;"/>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -78,7 +65,7 @@ useEffect(()=>{
             </div>
         </header>
         <div className="container">
-            <InfiniteScroll next={getMorePosts} hasMore={hasMore} dataLength={posts.length}>
+            <InfiniteScroll next={getMorePosts} hasMore={hasMore} dataLength={posts.length} loader={<div>loading</div>}>
             <div className="container_left bbb">
                         {
                             posts.map((post,idx)=>{
@@ -124,11 +111,7 @@ useEffect(()=>{
   )
 }
 
-export async function getServerSideProps({ req, res }) {
-    res.setHeader(
-        'Cache-Control',
-        'public, s-maxage=10, stale-while-revalidate=59'
-    )
+export async function getServerSideProps() {
     const resp = await fetch(process.env.API_URL+`/post?start=0&limit=10`)
     const data = await resp.json()
     const getNumberOfPosts = await fetch(process.env.API_URL+`/post/count`)
