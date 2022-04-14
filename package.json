@@ -31,6 +31,7 @@
     "mongoose": "^6.1.5",
     "next-ym": "^2.3.5",
     "nodemon": "^2.0.15",
+    "react-horizontal-scrolling-menu": "^2.7.1",
     "tslib": "^2.3.1"
   }
 }

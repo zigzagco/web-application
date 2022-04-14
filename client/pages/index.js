@@ -4,6 +4,7 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import InfiniteScroll from "react-infinite-scroll-component"
 import {useEffect,useState} from "react";
+
 import useSWRInfinite from "swr/infinite";
 import {useRouter} from "next/router";
 
@@ -53,12 +54,32 @@ useEffect(()=>{
                         </div></div>
                         <div className="cattext"><div className="ctext">
                             <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Экономика</span>
+                                <span className="catname">Общество</span>
                             </Link>
                         </div></div>
                         <div className="cattext"><div className="ctext">
                             <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Экономика</span>
+                                <span className="catname">Проишествия</span>
+                            </Link>
+                        </div></div>
+                        <div className="cattext"><div className="ctext">
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
+                                <span className="catname">Армия</span>
+                            </Link>
+                        </div></div>
+                        <div className="cattext"><div className="ctext">
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
+                                <span className="catname">Авто</span>
+                            </Link>
+                        </div></div>
+                        <div className="cattext"><div className="ctext">
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
+                                <span className="catname">Спорт</span>
+                            </Link>
+                        </div></div>
+                        <div className="cattext"><div className="ctext">
+                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
+                                <span className="catname">Недвижимость</span>
                             </Link>
                         </div></div>
 
@@ -67,7 +88,7 @@ useEffect(()=>{
             </div>
         </header>
         <div className="container">
-            <InfiniteScroll next={getMorePosts} hasMore={hasMore} dataLength={posts.length} loader={<div>loading</div>}>
+            <InfiniteScroll next={getMorePosts} hasMore={hasMore} dataLength={posts.length}>
             <div className="container_left bbb">
                         {
                             posts.map((post,idx)=>{
@@ -78,6 +99,7 @@ useEffect(()=>{
                                             <div className="article_box">
                                                 <div className="article_left">
                                                     <Image className="image"
+                                                           loader={()=>post.imgUri}
                                                     src={post.imgUri}
                                                     alt="Picture of the author"
                                                     width={150}

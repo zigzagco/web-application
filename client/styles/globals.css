@@ -354,11 +354,15 @@ a{
 .ctext{
   padding: 5px 10px;
   width: 100%;
+  max-height: 38px
 }
 .catname{
   color: black;
   font-weight: bold;
   cursor: pointer;
+  white-space: nowrap;
+  -webkit-line-clamp: 1;
+  vertical-align: middle;
 }
 .catname:hover{
   text-decoration: underline;
