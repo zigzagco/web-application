@@ -4,14 +4,21 @@ import Link from "next/link";
 import Navbar from "../components/Navbar";
 import InfiniteScroll from "react-infinite-scroll-component"
 import {useEffect,useState} from "react";
+import useSWRInfinite from "swr/infinite";
 import {useRouter} from "next/router";
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 export default function Home({data , NumberOfPosts}) {
     const [posts,setPosts] = useState(data)
     const [hasMore,sethasMore] = useState(true)
 const getMorePosts = async () =>{
-    const res = await fetch(process.env.API_URL+`/post?start=${posts.length}&limit=10`)
-    const newPosts = await res.json()
-    setPosts(posts => [...posts, ...newPosts])
+        try {
+            const res = await fetch(process.env.API_URL+`/post?start=${posts.length}&limit=10`)
+            const newPosts = await res.json()
+            setPosts(posts => [...posts, ...newPosts])
+        }catch (err){
+            console.log(err)
+        }
 }
 useEffect(()=>{
     sethasMore(NumberOfPosts > posts.length)
