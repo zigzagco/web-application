@@ -6,7 +6,6 @@ import InfiniteScroll from "react-infinite-scroll-component"
 import {useEffect,useState} from "react";
 import useSWRInfinite from "swr/infinite";
 import {useRouter} from "next/router";
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function Home({data , NumberOfPosts}) {
     const [posts,setPosts] = useState(data)
