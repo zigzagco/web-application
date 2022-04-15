@@ -99,7 +99,6 @@ useEffect(()=>{
                                             <div className="article_box">
                                                 <div className="article_left">
                                                     <Image className="image"
-                                                           loader={()=>post.imgUri}
                                                     src={post.imgUri}
                                                     alt="Picture of the author"
                                                     width={150}
