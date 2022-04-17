@@ -339,6 +339,8 @@ a{
   box-shadow:0 1px 6px 0 rgba(32 33 36 0.28);
 }
 .container_head{
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+  -webkit-tap-highlight-color: transparent;
 }
 .items{
   display: flex;
@@ -347,9 +349,11 @@ a{
   padding: 10px 10px 10px 0px;
   cursor: pointer;
   overflow-x: scroll;
+
 }
 .container_head ::-webkit-scrollbar{
   width: 0;
+
 }
 .cattext{
   border-radius: 8px;
