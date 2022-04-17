@@ -2,16 +2,18 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from "next/link";
 import Navbar from "../components/Navbar";
+import Scrolable from "../components/Scrolable";
 import InfiniteScroll from "react-infinite-scroll-component"
-import {useEffect,useState} from "react";
-
+import {useEffect, useRef, useState} from "react";
 import useSWRInfinite from "swr/infinite";
 import {useRouter} from "next/router";
+
+
 
 export default function Home({data , NumberOfPosts}) {
     const [posts,setPosts] = useState(data)
     const [hasMore,sethasMore] = useState(true)
-const getMorePosts = async () =>{
+        const getMorePosts = async () =>{
         try {
             const res = await fetch(process.env.API_URL+`/post?start=${posts.length}&limit=10`)
             const newPosts = await res.json()
@@ -35,59 +37,11 @@ useEffect(()=>{
     <Navbar/>
         <header>
             <div className="bottom_bar">
-                <div className="container">
-                    <div className="container_head">
-                        <div className="cattext"><div className="ctext">
-                                <Link href={"/[dir]"} as={"/politika"} passHref>
-                                    <span className="catname">Политика</span>
-                                </Link>
-                            </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/v_mire"} passHref>
-                                <span className="catname">В мире</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Экономика</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Общество</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Проишествия</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Армия</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Авто</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Спорт</span>
-                            </Link>
-                        </div></div>
-                        <div className="cattext"><div className="ctext">
-                            <Link href={"/[dir]"} as={"/ekonomika"} passHref>
-                                <span className="catname">Недвижимость</span>
-                            </Link>
-                        </div></div>
-
-                    </div>
-                </div>
+                <Scrolable/>
             </div>
         </header>
         <div className="container">
+
             <InfiniteScroll next={getMorePosts} hasMore={hasMore} dataLength={posts.length}>
             <div className="container_left bbb">
                         {
