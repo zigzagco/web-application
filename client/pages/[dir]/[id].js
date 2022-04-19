@@ -28,7 +28,7 @@ export default function Post({post}){
                         <div className="post_img">
                             <Image
                                 src={post.imgUri}
-                                alt="Picture of the author"
+                                alt={post.title}
                                 layout="fill"
                                 objectFit="contain"
                                 priority
@@ -49,8 +49,8 @@ export default function Post({post}){
                                     post.en_keywords.map((postk,index)=>{
                                         return(
                                             <div className="key_item" key={index}>
-                                                <div className="ctext">
-                                                <Link href={'/'+postk} passHref><span className="catname">{post.keywords[index]}</span></Link>
+                                                <div className="tagtext">
+                                                <Link href={'/'+postk} passHref><span className="tagname">{post.keywords[index]}</span></Link>
                                                 </div>
                                             </div>
 
