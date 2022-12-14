@@ -5,16 +5,9 @@ import ScrollContainer from "react-indiana-drag-scroll";
 const Scrolable = props => {
     const headers = [
         {title:"Политика",link:"politika"},
-        {title:"В мире",link:"v_mire"},
+        //{title:"В мире",link:"v_mire"},
         {title:"Экономика",link:"ekonomika"},
         {title:"Общество",link:"ekonomika"},
-        {title:"Политика",link:"politika"},
-        {title:"В мире",link:"v_mire"},
-        {title:"Экономика",link:"ekonomika"},
-        {title:"Общество",link:"ekonomika"},
-        {title:"Политика",link:"politika"},
-        {title:"В мире",link:"v_mire"},
-
     ]
     return (
         <div className="container">
