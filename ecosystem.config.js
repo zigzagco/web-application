@@ -8,7 +8,8 @@ module.exports = {
       script:"npm run build"
     },
     env_development: {
-      NODE_ENV: "development"
+      NODE_ENV: "development",
+      script:"npm run dev"
     }
   },
     {
