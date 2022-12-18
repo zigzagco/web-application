@@ -2,6 +2,7 @@ require('dotenv').config()
 module.exports = {
   productionBrowserSourceMaps: true,
   outputStandalone: true,
+  assetPrefix: '204819.vds.as210546.net',
   images:{
     domains: ['146.19.207.28:8000','i.imgur.com'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
