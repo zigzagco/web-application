@@ -28,7 +28,6 @@ useEffect(()=>{
 
     return (
     <div>
-
       <Head>
           <meta httpEquiv="Content-Type" content="text/html; charset=utf-8;"/>
           <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -65,7 +64,7 @@ useEffect(()=>{
                                                             <h3>{post.title}</h3>
                                                         </div>
                                                     </Link>
-                                                    <div className="article_desc">{post.text[0]}</div>
+                                                    <div className="article_desc">{post.text[0].toString().substring(350, 0)+".."}</div>
                                                     <div className="article_meta">
                                                         <time dateTime={post.time +" "+post.date} className="news__date">
                                                             {post.date}

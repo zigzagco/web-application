@@ -43,7 +43,7 @@ const Content = ({data,number}) => {
                                                 </div>
                                                 <div className="article_right">
                                                     <div className="article_title"><h3>{post.title}</h3></div>
-                                                    <div className="article_desc">{post.text[0]}</div>
+                                                    <div className="article_desc">{post.text[0].toString().substring(350, 0)+".."}</div>
                                                     <div className="article_meta">
                                                         <time dateTime={post.time +" "+post.date} className="news__date">
                                                             {post.date}

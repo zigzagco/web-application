@@ -53,7 +53,6 @@ export default function Post({post}){
                                                 <Link href={'/'+postk} passHref><span className="tagname">{post.keywords[index]}</span></Link>
                                                 </div>
                                             </div>
-
                                         )
                                     })
                                 }
